@@ -11,7 +11,7 @@ const answerRoute = require("./routes/answerRoute");
 // user routes middleware
 app.use(
 	cors({
-		origin: process.env.FRONTEND_URL,
+		origin: "https://evanforum1.netlify.app",
 	})
 );
 app.use(express.json());
