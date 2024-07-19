@@ -5,7 +5,7 @@ const { StatusCodes } = require("http-status-codes");
 
 async function allQuestion(req, res) {
 	const query =
-		"SELECT QUESTIONS.id , QUESTIONS.userid,  users.username, questionid, title FROM QUESTIONS JOIN users ON QUESTIONS.userid = users.userid";
+		"SELECT questions.id , questions.userid,  users.username, questionid, title FROM questions JOIN users ON questions.userid = users.userid";
 	const [result] = await dbConnection.query(query);
 
 	return res.status(StatusCodes.OK).send(result);
@@ -19,7 +19,7 @@ async function postQuestion(req, res) {
 
 	const unique = uuidv4();
 	await dbConnection.query(
-		"INSERT INTO QUESTIONS (questionid , userid , title , description , username) VALUES ( ? , ? , ? , ? , ?)",
+		"INSERT INTO questions (questionid , userid , title , description , username) VALUES ( ? , ? , ? , ? , ?)",
 		[unique, userid, title, question , username]
 	);
 
@@ -32,7 +32,7 @@ async function singleQuestion(req, res) {
 	try {
 		const id = req.params.id;
 		const questionQuery =
-			"SELECT title, description FROM QUESTIONS WHERE questionid = ?";
+			"SELECT title, description FROM questions WHERE questionid = ?";
 		const answerQuery =
 			"SELECT answer, username FROM answers WHERE questionid = ?";
 
